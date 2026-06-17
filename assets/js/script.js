@@ -17,7 +17,6 @@ sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); }
 
 
 
-
 // contact form variables
 const form = document.querySelector("[data-form]");
 const formInputs = document.querySelectorAll("[data-form-input]");
@@ -100,4 +99,19 @@ document.addEventListener("keydown", function (e) {
   if (e.key === "Escape" && certLightbox && certLightbox.classList.contains("active")) {
     closeCertLightbox();
   }
+});
+
+
+
+// -----------------------------------------------
+// Highlights → Certificate lightbox
+// -----------------------------------------------
+
+const highlightItems = document.querySelectorAll(".highlight-clickable[data-cert-link]");
+
+highlightItems.forEach(function (item) {
+  item.addEventListener("click", function () {
+    const imgSrc = this.dataset.certLink;
+    if (imgSrc) openCertLightbox(imgSrc);
+  });
 });
