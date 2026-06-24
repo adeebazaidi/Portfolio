@@ -82,7 +82,7 @@ const closeCertLightbox = function () {
   certLightbox.classList.remove("active");
   document.body.style.overflow = "";
   // clear src after transition so image doesn't flash
-  setTimeout(function () { certLightboxImg.src = ""; }, 300);
+  setTimeout(function () { certLightboxImg.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"; }, 300);
 };
 
 certTiles.forEach(function (tile) {
