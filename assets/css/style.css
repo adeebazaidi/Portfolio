@@ -761,6 +761,11 @@ main {
   font-size: 13px;
 }
 
+/* Reduce vertical padding of highlight cards */
+.achievements-highlights .service-item {
+  padding: 12px 20px;
+}
+
 
 
 
@@ -1810,6 +1815,10 @@ textarea.form-input::-webkit-resizer {
     padding: 30px;
   }
 
+  .achievements-highlights .service-item {
+    padding: 15px 30px;
+  }
+
   .service-icon-box {
     margin-bottom: 0;
     margin-top: 5px;
@@ -2483,4 +2492,185 @@ textarea.form-input::-webkit-resizer {
 .service-item:hover .service-icon-box ion-icon {
   color: var(--orange-yellow-crayola) !important;
   filter: drop-shadow(0 0 6px rgba(227, 40, 121, 0.4));
+}
+
+/* -----------------------------------------------
+   Preloader Styles
+----------------------------------------------- */
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  background: var(--smoky-black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.preloader.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.preloader-content {
+  text-align: center;
+}
+
+.preloader-brand {
+  font-family: var(--ff-poppins);
+  font-size: 16px;
+  font-weight: var(--fw-400);
+  color: var(--light-gray);
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  animation: pulseBrand 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes pulseBrand {
+  0% {
+    opacity: 0.85;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  margin: auto;
+  position: relative;
+}
+
+.loader:before {
+  content: '';
+  width: 48px;
+  height: 5px;
+  background: hsla(333, 70%, 52%, 0.35);
+  position: absolute;
+  top: 60px;
+  left: 0;
+  border-radius: 50%;
+  animation: shadow324 0.5s linear infinite;
+}
+
+.loader:after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: var(--orange-yellow-crayola);
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 4px;
+  animation: jump7456 0.5s linear infinite;
+}
+
+@keyframes jump7456 {
+  15% {
+    border-bottom-right-radius: 3px;
+  }
+
+  25% {
+    transform: translateY(9px) rotate(22.5deg);
+  }
+
+  50% {
+    transform: translateY(18px) scale(1, .9) rotate(45deg);
+    border-bottom-right-radius: 40px;
+  }
+
+  75% {
+    transform: translateY(9px) rotate(67.5deg);
+  }
+
+  100% {
+    transform: translateY(0) rotate(90deg);
+  }
+}
+
+@keyframes shadow324 {
+
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+
+  50% {
+    transform: scale(1.2, 1);
+  }
+}
+
+/* -----------------------------------------------
+   Mobile Navbar Improvements (screens under 1024px)
+----------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .navbar {
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+    width: calc(100% - 30px);
+    border-radius: 20px !important;
+    background: hsla(0, 0%, 100%, 0.92);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--jet);
+    box-shadow: 0 10px 30px hsla(333, 20%, 15%, 0.1);
+    z-index: 5;
+    padding: 0;
+  }
+
+  .navbar-list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 4px 6px;
+    gap: 0 !important;
+  }
+
+  .navbar-link {
+    position: relative;
+    padding: 15px 5px !important;
+    font-size: 10.5px;
+    font-weight: var(--fw-500);
+    text-align: center;
+    transition: color var(--transition-1), transform var(--transition-1);
+    white-space: nowrap;
+  }
+
+  @media (min-width: 480px) {
+    .navbar-link {
+      font-size: var(--fs-8);
+      padding: 15px 10px !important;
+    }
+  }
+
+  /* Interactive active underline bar */
+  .navbar-link::after {
+    content: "";
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: var(--orange-yellow-crayola);
+    border-radius: 3px;
+    transition: width var(--transition-1);
+  }
+
+  .navbar-link.active {
+    transform: scale(1.04);
+  }
+
+  .navbar-link.active::after {
+    width: 14px;
+  }
 }

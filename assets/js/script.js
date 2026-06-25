@@ -115,3 +115,26 @@ highlightItems.forEach(function (item) {
     if (imgSrc) openCertLightbox(imgSrc);
   });
 });
+
+// Preloader fade-out (enforcing at least 800ms visibility)
+const preloaderStartTime = Date.now();
+
+window.addEventListener("load", function () {
+  const preloader = document.querySelector("[data-preloader]");
+  if (preloader) {
+    const elapsed = Date.now() - preloaderStartTime;
+    const remainingTime = Math.max(0, 800 - elapsed);
+    
+    setTimeout(function () {
+      preloader.classList.add("loaded");
+    }, remainingTime);
+  }
+});
+
+// Fallback to hide preloader after 3 seconds
+setTimeout(function () {
+  const preloader = document.querySelector("[data-preloader]");
+  if (preloader && !preloader.classList.contains("loaded")) {
+    preloader.classList.add("loaded");
+  }
+}, 3000);
