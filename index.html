@@ -52,11 +52,12 @@
       <div class="sidebar-info">
 
         <figure class="avatar-box">
-          <img src="./assets/images/my-profile.jpg" alt="Adeeba Fatima Zaidi" width="68">
+          <img src="./assets/images/my-profile.jpg" alt="Adeeba Fatima Zaidi" width="60">
         </figure>
 
         <div class="info-content">
           <h1 class="name" title="Adeeba Fatima Zaidi">Adeeba Fatima Zaidi</h1>
+          <p class="title">AI/ML Engineer &amp; Full-Stack Developer</p>
         </div>
 
         <button class="info_more-btn" data-sidebar-btn>
@@ -69,7 +70,7 @@
 
       <div class="sidebar-info_more">
 
-        <div class="separator"></div>
+        <p class="hero-tagline">Building intelligent systems and scalable web applications.</p>
 
         <ul class="contacts-list">
 
@@ -119,29 +120,34 @@
 
         </ul>
 
-        <div class="separator"></div>
+        <div class="sidebar-bottom-wrapper">
+          <button class="hero-btn secondary" id="hero-btn-resume" data-hero-nav="resume">
+            <ion-icon name="document-text-outline"></ion-icon>
+            View Resume
+          </button>
 
-        <ul class="social-list">
+          <ul class="social-list">
 
-          <li class="social-item">
-            <a href="https://www.linkedin.com/in/adeeba-fatima-zaidi-a53295274/" target="_blank" class="social-link">
-              <ion-icon name="logo-linkedin"></ion-icon>
-            </a>
-          </li>
+            <li class="social-item">
+              <a href="https://www.linkedin.com/in/adeeba-fatima-zaidi-a53295274/" target="_blank" class="social-link">
+                <ion-icon name="logo-linkedin"></ion-icon>
+              </a>
+            </li>
 
-          <li class="social-item">
-            <a href="https://github.com/adeebazaidi" target="_blank" class="social-link">
-              <ion-icon name="logo-github"></ion-icon>
-            </a>
-          </li>
+            <li class="social-item">
+              <a href="https://github.com/adeebazaidi" target="_blank" class="social-link">
+                <ion-icon name="logo-github"></ion-icon>
+              </a>
+            </li>
 
-          <li class="social-item">
-            <a href="https://www.instagram.com/_.fatima._.03?igsh=Z2E3YXl6MXdxb3Bn" target="_blank" class="social-link">
-              <ion-icon name="logo-instagram"></ion-icon>
-            </a>
-          </li>
+            <li class="social-item">
+              <a href="https://www.instagram.com/_.fatima._.03?igsh=Z2E3YXl6MXdxb3Bn" target="_blank" class="social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
 
-        </ul>
+          </ul>
+        </div>
 
       </div>
 
@@ -181,6 +187,10 @@
           </li>
 
           <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Coding</button>
+          </li>
+
+          <li class="navbar-item">
             <button class="navbar-link" data-nav-link>Contact</button>
           </li>
 
@@ -195,7 +205,7 @@
         - #ABOUT
       -->
 
-      <article class="about  active" data-page="about">
+      <article class="about active" data-page="about">
 
         <header>
           <h2 class="h2 article-title">About me</h2>
@@ -360,112 +370,368 @@
 
 
         <!--
-          - tech stack
+          - tech stack (interactive)
         -->
 
         <section class="tech-stack">
 
           <h3 class="h3 tech-stack-title">Tech Stack</h3>
+          <p class="tech-stack-hint">Hover or tap a card to explore details</p>
 
-          <div class="ts-grid">
+          <div class="interactive-tech-grid">
 
-            <!-- Programming Languages -->
-            <div class="ts-category">
-              <div class="ts-cat-header">
-                <span class="ts-cat-icon">
+            <!-- Python -->
+            <div class="itc" tabindex="0">
+              <div class="itc-top">
+                <div class="itc-icon" style="background:hsla(212,63%,40%,0.12);color:#3776ab;">
                   <ion-icon name="code-slash-outline"></ion-icon>
-                </span>
-                <h4 class="ts-cat-name">Programming Languages</h4>
+                </div>
+                <div class="itc-info">
+                  <h5 class="itc-name">Python</h5>
+                  <span class="itc-level-badge">Advanced</span>
+                </div>
               </div>
-              <div class="ts-tags">
-                <span class="ts-tag">Python</span>
-                <span class="ts-tag">JavaScript</span>
-                <span class="ts-tag">SQL</span>
+              <div class="itc-bar">
+                <div class="itc-bar-track">
+                  <div class="itc-bar-fill" style="--pct:88%"></div>
+                </div>
+                <span class="itc-pct">88%</span>
               </div>
-            </div>
-
-            <!-- Frontend -->
-            <div class="ts-category">
-              <div class="ts-cat-header">
-                <span class="ts-cat-icon">
-                  <ion-icon name="globe-outline"></ion-icon>
-                </span>
-                <h4 class="ts-cat-name">Frontend</h4>
-              </div>
-              <div class="ts-tags">
-                <span class="ts-tag">React</span>
-                <span class="ts-tag">HTML5</span>
-                <span class="ts-tag">CSS3</span>
-                <span class="ts-tag">Tailwind CSS</span>
+              <div class="itc-detail">
+                <div class="itc-meta">
+                  <span><ion-icon name="time-outline"></ion-icon> 2+ Years</span>
+                  <span><ion-icon name="folder-outline"></ion-icon> 15+ Projects</span>
+                </div>
+                <p class="itc-desc">Core language for AI/ML, data analysis, scripting, and backend development.</p>
               </div>
             </div>
 
-            <!-- Backend -->
-            <div class="ts-category">
-              <div class="ts-cat-header">
-                <span class="ts-cat-icon">
-                  <ion-icon name="server-outline"></ion-icon>
-                </span>
-                <h4 class="ts-cat-name">Backend</h4>
+            <!-- JavaScript -->
+            <div class="itc" tabindex="0">
+              <div class="itc-top">
+                <div class="itc-icon" style="background:hsla(53,93%,54%,0.15);color:#c9a600;">
+                  <ion-icon name="logo-javascript"></ion-icon>
+                </div>
+                <div class="itc-info">
+                  <h5 class="itc-name">JavaScript</h5>
+                  <span class="itc-level-badge">Intermediate</span>
+                </div>
               </div>
-              <div class="ts-tags">
-                <span class="ts-tag">Node.js</span>
-                <span class="ts-tag">Express.js</span>
+              <div class="itc-bar">
+                <div class="itc-bar-track">
+                  <div class="itc-bar-fill" style="--pct:80%"></div>
+                </div>
+                <span class="itc-pct">80%</span>
               </div>
-            </div>
-
-            <!-- Databases -->
-            <div class="ts-category">
-              <div class="ts-cat-header">
-                <span class="ts-cat-icon">
-                  <ion-icon name="layers-outline"></ion-icon>
-                </span>
-                <h4 class="ts-cat-name">Databases</h4>
-              </div>
-              <div class="ts-tags">
-                <span class="ts-tag">MongoDB</span>
-                <span class="ts-tag">MySQL</span>
+              <div class="itc-detail">
+                <div class="itc-meta">
+                  <span><ion-icon name="time-outline"></ion-icon> 2+ Years</span>
+                  <span><ion-icon name="folder-outline"></ion-icon> 10+ Projects</span>
+                </div>
+                <p class="itc-desc">Interactive UIs, frontend logic, and full-stack web applications.</p>
               </div>
             </div>
 
-            <!-- AI & Machine Learning -->
-            <div class="ts-category">
-              <div class="ts-cat-header">
-                <span class="ts-cat-icon">
+            <!-- HTML5 -->
+            <div class="itc" tabindex="0">
+              <div class="itc-top">
+                <div class="itc-icon" style="background:hsla(19,88%,52%,0.12);color:#e34f26;">
+                  <ion-icon name="logo-html5"></ion-icon>
+                </div>
+                <div class="itc-info">
+                  <h5 class="itc-name">HTML5</h5>
+                  <span class="itc-level-badge">Advanced</span>
+                </div>
+              </div>
+              <div class="itc-bar">
+                <div class="itc-bar-track">
+                  <div class="itc-bar-fill" style="--pct:90%"></div>
+                </div>
+                <span class="itc-pct">90%</span>
+              </div>
+              <div class="itc-detail">
+                <div class="itc-meta">
+                  <span><ion-icon name="time-outline"></ion-icon> 2+ Years</span>
+                  <span><ion-icon name="folder-outline"></ion-icon> 15+ Projects</span>
+                </div>
+                <p class="itc-desc">Semantic markup, accessibility, and structured document creation.</p>
+              </div>
+            </div>
+
+            <!-- CSS3 -->
+            <div class="itc" tabindex="0">
+              <div class="itc-top">
+                <div class="itc-icon" style="background:hsla(224,70%,50%,0.12);color:#264de4;">
+                  <ion-icon name="logo-css3"></ion-icon>
+                </div>
+                <div class="itc-info">
+                  <h5 class="itc-name">CSS3</h5>
+                  <span class="itc-level-badge">Advanced</span>
+                </div>
+              </div>
+              <div class="itc-bar">
+                <div class="itc-bar-track">
+                  <div class="itc-bar-fill" style="--pct:85%"></div>
+                </div>
+                <span class="itc-pct">85%</span>
+              </div>
+              <div class="itc-detail">
+                <div class="itc-meta">
+                  <span><ion-icon name="time-outline"></ion-icon> 2+ Years</span>
+                  <span><ion-icon name="folder-outline"></ion-icon> 15+ Projects</span>
+                </div>
+                <p class="itc-desc">Responsive design, animations, flexbox/grid, and modern UI styling.</p>
+              </div>
+            </div>
+
+            <!-- React -->
+            <div class="itc" tabindex="0">
+              <div class="itc-top">
+                <div class="itc-icon" style="background:hsla(194,100%,50%,0.1);color:#00b3d1;">
+                  <ion-icon name="cube-outline"></ion-icon>
+                </div>
+                <div class="itc-info">
+                  <h5 class="itc-name">React</h5>
+                  <span class="itc-level-badge">Intermediate</span>
+                </div>
+              </div>
+              <div class="itc-bar">
+                <div class="itc-bar-track">
+                  <div class="itc-bar-fill" style="--pct:72%"></div>
+                </div>
+                <span class="itc-pct">72%</span>
+              </div>
+              <div class="itc-detail">
+                <div class="itc-meta">
+                  <span><ion-icon name="time-outline"></ion-icon> 1.5 Years</span>
+                  <span><ion-icon name="folder-outline"></ion-icon> 6+ Projects</span>
+                </div>
+                <p class="itc-desc">Component-based UIs, hooks, state management, and SPA development.</p>
+              </div>
+            </div>
+
+            <!-- REST APIs -->
+            <div class="itc" tabindex="0">
+              <div class="itc-top">
+                <div class="itc-icon" style="background:hsla(239,84%,67%,0.12);color:#4f46e5;">
+                  <ion-icon name="swap-horizontal-outline"></ion-icon>
+                </div>
+                <div class="itc-info">
+                  <h5 class="itc-name">REST APIs</h5>
+                  <span class="itc-level-badge">Advanced</span>
+                </div>
+              </div>
+              <div class="itc-bar">
+                <div class="itc-bar-track">
+                  <div class="itc-bar-fill" style="--pct:85%"></div>
+                </div>
+                <span class="itc-pct">85%</span>
+              </div>
+              <div class="itc-detail">
+                <div class="itc-meta">
+                  <span><ion-icon name="time-outline"></ion-icon> 2+ Years</span>
+                  <span><ion-icon name="folder-outline"></ion-icon> 8+ Projects</span>
+                </div>
+                <p class="itc-desc">Designing, implementing, and integrating secure, scalable RESTful web services and APIs.</p>
+              </div>
+            </div>
+
+            <!-- Flask -->
+            <div class="itc" tabindex="0">
+              <div class="itc-top">
+                <div class="itc-icon" style="background:hsla(0,0%,30%,0.08);color:#555;">
+                  <ion-icon name="git-network-outline"></ion-icon>
+                </div>
+                <div class="itc-info">
+                  <h5 class="itc-name">Flask</h5>
+                  <span class="itc-level-badge">Learning</span>
+                </div>
+              </div>
+              <div class="itc-bar">
+                <div class="itc-bar-track">
+                  <div class="itc-bar-fill" style="--pct:62%"></div>
+                </div>
+                <span class="itc-pct">62%</span>
+              </div>
+              <div class="itc-detail">
+                <div class="itc-meta">
+                  <span><ion-icon name="time-outline"></ion-icon> 1 Year</span>
+                  <span><ion-icon name="folder-outline"></ion-icon> 3+ Projects</span>
+                </div>
+                <p class="itc-desc">Lightweight Python microframework for APIs and AI-powered web apps.</p>
+              </div>
+            </div>
+
+            <!-- AI / ML Tools -->
+            <div class="itc" tabindex="0">
+              <div class="itc-top">
+                <div class="itc-icon" style="background:hsla(263,65%,50%,0.12);color:#7c3aed;">
                   <ion-icon name="hardware-chip-outline"></ion-icon>
-                </span>
-                <h4 class="ts-cat-name">AI &amp; Machine Learning</h4>
+                </div>
+                <div class="itc-info">
+                  <h5 class="itc-name">AI / ML Tools</h5>
+                  <span class="itc-level-badge">Intermediate</span>
+                </div>
               </div>
-              <div class="ts-tags">
-                <span class="ts-tag">Google Gemini API</span>
-                <span class="ts-tag">OpenAI API</span>
-                <span class="ts-tag">LangChain</span>
-                <span class="ts-tag">Prompt Engineering</span>
+              <div class="itc-bar">
+                <div class="itc-bar-track">
+                  <div class="itc-bar-fill" style="--pct:82%"></div>
+                </div>
+                <span class="itc-pct">82%</span>
+              </div>
+              <div class="itc-detail">
+                <div class="itc-meta">
+                  <span><ion-icon name="time-outline"></ion-icon> 1.5 Years</span>
+                  <span><ion-icon name="folder-outline"></ion-icon> 8+ Projects</span>
+                </div>
+                <p class="itc-desc">Gemini API, OpenAI, LangChain, Prompt Engineering &amp; ML model training.</p>
               </div>
             </div>
 
-            <!-- Tools & Platforms -->
-            <div class="ts-category">
-              <div class="ts-cat-header">
-                <span class="ts-cat-icon">
-                  <ion-icon name="construct-outline"></ion-icon>
-                </span>
-                <h4 class="ts-cat-name">Tools &amp; Platforms</h4>
+            <!-- SQL -->
+            <div class="itc" tabindex="0">
+              <div class="itc-top">
+                <div class="itc-icon" style="background:hsla(213,47%,40%,0.12);color:#336791;">
+                  <ion-icon name="layers-outline"></ion-icon>
+                </div>
+                <div class="itc-info">
+                  <h5 class="itc-name">SQL</h5>
+                  <span class="itc-level-badge">Intermediate</span>
+                </div>
               </div>
-              <div class="ts-tags">
-                <span class="ts-tag">Git</span>
-                <span class="ts-tag">GitHub</span>
-                <span class="ts-tag">Postman</span>
-                <span class="ts-tag">VS Code</span>
-                <span class="ts-tag">Figma</span>
-                <span class="ts-tag">Vercel</span>
-                <span class="ts-tag">Render</span>
+              <div class="itc-bar">
+                <div class="itc-bar-track">
+                  <div class="itc-bar-fill" style="--pct:70%"></div>
+                </div>
+                <span class="itc-pct">70%</span>
+              </div>
+              <div class="itc-detail">
+                <div class="itc-meta">
+                  <span><ion-icon name="time-outline"></ion-icon> 1.5 Years</span>
+                  <span><ion-icon name="folder-outline"></ion-icon> 5+ Projects</span>
+                </div>
+                <p class="itc-desc">Database queries, schema design, and data management with MySQL &amp; MongoDB.</p>
+              </div>
+            </div>
+
+            <!-- Git & GitHub -->
+            <div class="itc" tabindex="0">
+              <div class="itc-top">
+                <div class="itc-icon" style="background:hsla(10,80%,50%,0.12);color:#f05032;">
+                  <ion-icon name="git-branch-outline"></ion-icon>
+                </div>
+                <div class="itc-info">
+                  <h5 class="itc-name">Git &amp; GitHub</h5>
+                  <span class="itc-level-badge">Advanced</span>
+                </div>
+              </div>
+              <div class="itc-bar">
+                <div class="itc-bar-track">
+                  <div class="itc-bar-fill" style="--pct:85%"></div>
+                </div>
+                <span class="itc-pct">85%</span>
+              </div>
+              <div class="itc-detail">
+                <div class="itc-meta">
+                  <span><ion-icon name="time-outline"></ion-icon> 2+ Years</span>
+                  <span><ion-icon name="folder-outline"></ion-icon> All Projects</span>
+                </div>
+                <p class="itc-desc">Version control, branching, open-source contribution, and collaboration.</p>
+              </div>
+            </div>
+
+            <!-- Node.js -->
+            <div class="itc" tabindex="0">
+              <div class="itc-top">
+                <div class="itc-icon" style="background:hsla(120,60%,40%,0.12);color:#339933;">
+                  <ion-icon name="logo-nodejs"></ion-icon>
+                </div>
+                <div class="itc-info">
+                  <h5 class="itc-name">Node.js</h5>
+                  <span class="itc-level-badge">Learning</span>
+                </div>
+              </div>
+              <div class="itc-bar">
+                <div class="itc-bar-track">
+                  <div class="itc-bar-fill" style="--pct:60%"></div>
+                </div>
+                <span class="itc-pct">60%</span>
+              </div>
+              <div class="itc-detail">
+                <div class="itc-meta">
+                  <span><ion-icon name="time-outline"></ion-icon> 1 Year</span>
+                  <span><ion-icon name="folder-outline"></ion-icon> 3+ Projects</span>
+                </div>
+                <p class="itc-desc">Server-side JavaScript with Express.js for REST API development.</p>
+              </div>
+            </div>
+
+            <!-- Tailwind CSS -->
+            <div class="itc" tabindex="0">
+              <div class="itc-top">
+                <div class="itc-icon" style="background:hsla(187,100%,40%,0.12);color:#06b6d4;">
+                  <ion-icon name="color-palette-outline"></ion-icon>
+                </div>
+                <div class="itc-info">
+                  <h5 class="itc-name">Tailwind CSS</h5>
+                  <span class="itc-level-badge">Learning</span>
+                </div>
+              </div>
+              <div class="itc-bar">
+                <div class="itc-bar-track">
+                  <div class="itc-bar-fill" style="--pct:68%"></div>
+                </div>
+                <span class="itc-pct">68%</span>
+              </div>
+              <div class="itc-detail">
+                <div class="itc-meta">
+                  <span><ion-icon name="time-outline"></ion-icon> 1 Year</span>
+                  <span><ion-icon name="folder-outline"></ion-icon> 4+ Projects</span>
+                </div>
+                <p class="itc-desc">Utility-first CSS framework for rapid, consistent UI design.</p>
               </div>
             </div>
 
           </div>
 
         </section>
+
+
+
+        <!--
+          - visitor counter
+        -->
+
+        <section class="visitor-counter">
+
+          <h3 class="h3 vc-title">
+            Visitor Analytics
+          </h3>
+
+          <div class="vc-grid">
+
+            <div class="vc-card">
+              <div class="vc-icon"><ion-icon name="people-outline"></ion-icon></div>
+              <div class="vc-num" id="totalVisitors">--</div>
+              <div class="vc-label">Total Visitors</div>
+            </div>
+
+            <div class="vc-card">
+              <div class="vc-icon"><ion-icon name="today-outline"></ion-icon></div>
+              <div class="vc-num" id="todayVisitors">--</div>
+              <div class="vc-label">Today</div>
+            </div>
+
+            <div class="vc-card">
+              <div class="vc-icon"><ion-icon name="calendar-outline"></ion-icon></div>
+              <div class="vc-num" id="monthlyVisitors">--</div>
+              <div class="vc-label">This Month</div>
+            </div>
+
+          </div>
+
+        </section>
+
 
       </article>
 
@@ -481,6 +747,8 @@
         <header>
           <h2 class="h2 article-title">Resume</h2>
         </header>
+
+
 
         <section class="timeline">
 
@@ -556,6 +824,31 @@
             </li>
 
           </ol>
+
+        </section>
+
+        <!-- Resume Center -->
+        <section class="resume-center">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="document-text-outline"></ion-icon>
+            </div>
+            <h3 class="h3">My Resume</h3>
+          </div>
+
+          <div class="rc-btn-group">
+            <a href="https://drive.google.com/drive/folders/1EFgBK9N5Mv3l5Ruf827p_WI6-JpFcNXN?usp=sharing"
+              target="_blank" class="rc-btn primary">
+              <ion-icon name="eye-outline"></ion-icon>
+              View Resume
+            </a>
+            <a href="https://drive.google.com/drive/folders/1EFgBK9N5Mv3l5Ruf827p_WI6-JpFcNXN?usp=sharing"
+              target="_blank" class="rc-btn secondary">
+              <ion-icon name="download-outline"></ion-icon>
+              Download Resume
+            </a>
+          </div>
 
         </section>
 
@@ -716,12 +1009,55 @@
           <h2 class="h2 article-title">Projects</h2>
         </header>
 
+        <!-- Project Analytics Dashboard -->
+        <section class="analytics-dashboard">
+
+          <h3 class="h3 analytics-title">Project Analytics</h3>
+
+          <div class="analytics-stats-grid">
+
+            <div class="analytics-stat-card">
+              <div class="asc-icon"><ion-icon name="folder-open-outline"></ion-icon></div>
+              <div class="asc-num" id="statsProjectsCount">--</div>
+              <div class="asc-label">Projects Completed</div>
+            </div>
+
+            <div class="analytics-stat-card">
+              <div class="asc-icon"><ion-icon name="layers-outline"></ion-icon></div>
+              <div class="asc-num">15+</div>
+              <div class="asc-label">Technologies Used</div>
+            </div>
+
+            <div class="analytics-stat-card">
+              <div class="asc-icon"><ion-icon name="git-commit-outline"></ion-icon></div>
+              <div class="asc-num" id="githubCommitsCount">--</div>
+              <div class="asc-label">GitHub Commits</div>
+            </div>
+
+            <div class="analytics-stat-card">
+              <div class="asc-icon"><ion-icon name="ribbon-outline"></ion-icon></div>
+              <div class="asc-num" id="statsCertsCount">--</div>
+              <div class="asc-label">Certifications</div>
+            </div>
+
+            <div class="analytics-stat-card">
+              <div class="asc-icon"><ion-icon name="briefcase-outline"></ion-icon></div>
+              <div class="asc-num" id="statsInternshipsCount">--</div>
+              <div class="asc-label">Internships</div>
+            </div>
+
+          </div>
+
+
+        </section>
+
+
         <section class="projects">
 
           <ul class="project-list">
 
             <!-- 1. Visual AI -->
-            <li class="project-item  active" data-filter-item data-category="artificial intelligence">
+            <li class="project-item active" data-filter-item data-category="artificial intelligence">
               <a href="https://github.com/adeebazaidi/Visual-AI.git" target="_blank">
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -735,7 +1071,7 @@
             </li>
 
             <!-- 2. TaskFlow -->
-            <li class="project-item  active" data-filter-item data-category="web development">
+            <li class="project-item active" data-filter-item data-category="web development">
               <a href="https://task-flow-nu-azure.vercel.app" target="_blank">
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -749,7 +1085,7 @@
             </li>
 
             <!-- 3. WayForge -->
-            <li class="project-item  active" data-filter-item data-category="web development">
+            <li class="project-item active" data-filter-item data-category="web development">
               <a href="https://way-forge.vercel.app/" target="_blank">
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -763,7 +1099,7 @@
             </li>
 
             <!-- 4. AI Resume Builder -->
-            <li class="project-item  active" data-filter-item data-category="artificial intelligence">
+            <li class="project-item active" data-filter-item data-category="artificial intelligence">
               <a href="https://airesumeandportfolio.streamlit.app/" target="_blank">
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -778,7 +1114,7 @@
             </li>
 
             <!-- 5. Campus Connect -->
-            <li class="project-item  active" data-filter-item data-category="web development">
+            <li class="project-item active" data-filter-item data-category="web development">
               <a href="https://campus-connect-one-umber.vercel.app/" target="_blank">
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -792,7 +1128,7 @@
             </li>
 
             <!-- 6. Quiz Quest -->
-            <li class="project-item  active" data-filter-item data-category="web development">
+            <li class="project-item active" data-filter-item data-category="web development">
               <a href="https://quiz-game-mu-one.vercel.app/" target="_blank">
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -806,7 +1142,7 @@
             </li>
 
             <!-- 7. Rock Paper Scissors -->
-            <li class="project-item  active" data-filter-item data-category="web development">
+            <li class="project-item active" data-filter-item data-category="web development">
               <a href="https://rock-paper-scissors-eight-taupe.vercel.app/" target="_blank">
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -820,7 +1156,7 @@
             </li>
 
             <!-- 8. House Price Prediction -->
-            <li class="project-item  active" data-filter-item data-category="machine learning">
+            <li class="project-item active" data-filter-item data-category="machine learning">
               <a href="https://github.com/adeebazaidi/House-Price-Prediction.git" target="_blank">
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -835,7 +1171,7 @@
             </li>
 
             <!-- 9. Calculator -->
-            <li class="project-item  active" data-filter-item data-category="web development">
+            <li class="project-item active" data-filter-item data-category="web development">
               <a href="https://github.com/adeebazaidi/Calculator.git" target="_blank">
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -849,7 +1185,7 @@
             </li>
 
             <!-- 10. CookWithWhat -->
-            <li class="project-item  active" data-filter-item data-category="web development">
+            <li class="project-item active" data-filter-item data-category="web development">
               <a href="https://github.com/adeebazaidi/CookSculpt.git" target="_blank">
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -1111,6 +1447,256 @@
           </ul>
 
         </section>
+
+      </article>
+
+
+
+
+      <!--
+        - #CODING
+      -->
+
+      <article class="coding" data-page="coding">
+
+        <header class="coding-header-row">
+          <h2 class="h2 article-title">Coding Profiles</h2>
+          <div class="sync-status-container">
+            <div class="sync-status">
+              <span class="sync-indicator-dot active" id="syncIndicator"></span>
+              <span id="syncStatusText" class="sync-text">Live Sync Active</span>
+            </div>
+            <button id="syncNowBtn" class="sync-btn" title="Refresh Live Data">
+              <ion-icon name="sync-outline"></ion-icon>
+            </button>
+          </div>
+        </header>
+
+
+        <!-- GitHub Statistics Section -->
+        <section class="github-stats-section">
+
+          <h3 class="h3 coding-section-title">GitHub Statistics</h3>
+
+          <div class="gh-stats-grid" id="githubStatsGrid">
+
+            <div class="gh-stat-card">
+              <div class="gh-stat-icon"><ion-icon name="folder-open-outline"></ion-icon></div>
+              <div class="gh-stat-num" id="ghRepos">--</div>
+              <div class="gh-stat-label">Repositories</div>
+            </div>
+
+            <div class="gh-stat-card">
+              <div class="gh-stat-icon"><ion-icon name="people-outline"></ion-icon></div>
+              <div class="gh-stat-num" id="ghFollowers">--</div>
+              <div class="gh-stat-label">Followers</div>
+            </div>
+
+            <div class="gh-stat-card">
+              <div class="gh-stat-icon"><ion-icon name="star-outline"></ion-icon></div>
+              <div class="gh-stat-num" id="ghStars">--</div>
+              <div class="gh-stat-label">Total Stars</div>
+            </div>
+
+            <div class="gh-stat-card">
+              <div class="gh-stat-icon"><ion-icon name="git-commit-outline"></ion-icon></div>
+              <div class="gh-stat-num" id="ghContributions">--</div>
+              <div class="gh-stat-label">Contributions</div>
+            </div>
+
+          </div>
+
+
+          <!-- GitHub Streak & Top Languages charts -->
+          <div class="gh-charts">
+
+            <div class="gh-chart-item">
+              <h4 class="gh-chart-title">Contribution Streak</h4>
+              <img
+                src="https://streak-stats.demolab.com?user=adeebazaidi&theme=default&hide_border=true&date_format=M%20j%5B%2C%20Y%5D&background=FFFFFF00&ring=B82E62&fire=B82E62&currStreakLabel=B82E62"
+                alt="GitHub Contribution Streak" class="gh-chart-img" loading="lazy">
+            </div>
+
+            <div class="gh-chart-item">
+              <h4 class="gh-chart-title">Most Used Languages</h4>
+              
+              <div class="language-bar">
+                <span style="width: 24%; background-color: #c9a600;" title="JavaScript: 24%"></span>
+                <span style="width: 24%; background-color: #e34f26;" title="HTML: 24%"></span>
+                <span style="width: 18%; background-color: #00b3d1;" title="React: 18%"></span>
+                <span style="width: 16%; background-color: #264de4;" title="CSS: 16%"></span>
+                <span style="width: 10%; background-color: #3776ab;" title="Python: 10%"></span>
+                <span style="width: 5%; background-color: #f37626;" title="Jupyter: 5%"></span>
+                <span style="width: 3%; background-color: #3178c6;" title="TypeScript: 3%"></span>
+              </div>
+
+              <ul class="language-legend">
+                <li>
+                  <span class="legend-dot" style="background-color: #c9a600;"></span>
+                  <span class="legend-name">JavaScript</span>
+                  <span class="legend-pct">24%</span>
+                </li>
+                <li>
+                  <span class="legend-dot" style="background-color: #e34f26;"></span>
+                  <span class="legend-name">HTML</span>
+                  <span class="legend-pct">24%</span>
+                </li>
+                <li>
+                  <span class="legend-dot" style="background-color: #00b3d1;"></span>
+                  <span class="legend-name">React</span>
+                  <span class="legend-pct">18%</span>
+                </li>
+                <li>
+                  <span class="legend-dot" style="background-color: #264de4;"></span>
+                  <span class="legend-name">CSS</span>
+                  <span class="legend-pct">16%</span>
+                </li>
+                <li>
+                  <span class="legend-dot" style="background-color: #3776ab;"></span>
+                  <span class="legend-name">Python</span>
+                  <span class="legend-pct">10%</span>
+                </li>
+                <li>
+                  <span class="legend-dot" style="background-color: #f37626;"></span>
+                  <span class="legend-name">Jupyter</span>
+                  <span class="legend-pct">5%</span>
+                </li>
+                <li>
+                  <span class="legend-dot" style="background-color: #3178c6;"></span>
+                  <span class="legend-name">TypeScript</span>
+                  <span class="legend-pct">3%</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- Coding Platform Profiles -->
+        <section class="coding-profiles-section">
+
+          <h3 class="h3 coding-section-title">Platform Profiles</h3>
+
+          <div class="coding-profiles-grid">
+
+            <!-- GitHub Profile -->
+            <div class="coding-profile-card">
+              <div class="cp-header">
+                <div class="cp-platform-icon gh-icon">
+                  <ion-icon name="logo-github"></ion-icon>
+                </div>
+                <div class="cp-platform-info">
+                  <h4 class="cp-platform-name">GitHub</h4>
+                  <p class="cp-username">@adeebazaidi</p>
+                </div>
+              </div>
+              <div class="cp-stats">
+                <div class="cp-stat">
+                  <span class="cp-stat-num" id="cpGhRepos">--</span>
+                  <span class="cp-stat-label">Repositories</span>
+                </div>
+                <div class="cp-stat">
+                  <span class="cp-stat-num" id="cpGhFollowers">--</span>
+                  <span class="cp-stat-label">Followers</span>
+                </div>
+                <div class="cp-stat">
+                  <span class="cp-stat-num" id="cpGhStars">--</span>
+                  <span class="cp-stat-label">Stars</span>
+                </div>
+              </div>
+              <div class="cp-achievements">
+                <span class="cp-badge">Open Source Contributor</span>
+                <span class="cp-badge">GSSoC Participant</span>
+                <span class="cp-badge">Freelance Developer</span>
+              </div>
+              <a href="https://github.com/adeebazaidi" target="_blank" class="cp-visit-btn">
+                <ion-icon name="open-outline"></ion-icon>
+                Visit Profile
+              </a>
+            </div>
+
+
+            <!-- LeetCode Profile -->
+            <div class="coding-profile-card">
+              <div class="cp-header">
+                <div class="cp-platform-icon lc-icon">
+                  <ion-icon name="code-slash-outline"></ion-icon>
+                </div>
+                <div class="cp-platform-info">
+                  <h4 class="cp-platform-name">LeetCode</h4>
+                  <p class="cp-username">@adeeba_27</p>
+                </div>
+              </div>
+              <div class="cp-stats">
+                <div class="cp-stat">
+                  <span class="cp-stat-num" id="lcSolved">--</span>
+                  <span class="cp-stat-label">Solved</span>
+                </div>
+                <div class="cp-stat">
+                  <span class="cp-stat-num" id="lcEasy">--</span>
+                  <span class="cp-stat-label">Easy</span>
+                </div>
+                <div class="cp-stat">
+                  <span class="cp-stat-num" id="lcMedium">--</span>
+                  <span class="cp-stat-label">Medium</span>
+                </div>
+              </div>
+              <div class="cp-achievements">
+                <span class="cp-badge">Problem Solver</span>
+                <span class="cp-badge">DSA Enthusiast</span>
+                <span class="cp-badge">Algo Practitioner</span>
+              </div>
+              <a href="https://leetcode.com/u/adeeba_27/" target="_blank" class="cp-visit-btn lc-btn">
+                <ion-icon name="open-outline"></ion-icon>
+                Visit Profile
+              </a>
+            </div>
+
+
+            <!-- LinkedIn Profile -->
+            <div class="coding-profile-card">
+              <div class="cp-header">
+                <div class="cp-platform-icon li-icon">
+                  <ion-icon name="logo-linkedin"></ion-icon>
+                </div>
+                <div class="cp-platform-info">
+                  <h4 class="cp-platform-name">LinkedIn</h4>
+                  <p class="cp-username">adeeba-fatima-zaidi</p>
+                </div>
+              </div>
+              <div class="cp-stats">
+                <div class="cp-stat">
+                  <span class="cp-stat-num">500+</span>
+                  <span class="cp-stat-label">Connections</span>
+                </div>
+                <div class="cp-stat">
+                  <span class="cp-stat-num" id="cpLiInternships">--</span>
+                  <span class="cp-stat-label">Internships</span>
+                </div>
+                <div class="cp-stat">
+                  <span class="cp-stat-num" id="cpLiCerts">--</span>
+                  <span class="cp-stat-label">Certifications</span>
+                </div>
+              </div>
+              <div class="cp-achievements">
+                <span class="cp-badge">AI &amp; ML Intern</span>
+                <span class="cp-badge">Web Dev Intern</span>
+                <span class="cp-badge">NPTEL Certified</span>
+              </div>
+              <a href="https://www.linkedin.com/in/adeeba-fatima-zaidi-a53295274/" target="_blank"
+                class="cp-visit-btn li-btn">
+                <ion-icon name="open-outline"></ion-icon>
+                Visit Profile
+              </a>
+            </div>
+
+
+          </div>
+
+        </section>
+
 
       </article>
 
