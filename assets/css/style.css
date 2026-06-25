@@ -315,7 +315,7 @@ article.active {
 
 main {
   margin: 15px 12px;
-  margin-bottom: 75px;
+  margin-bottom: 150px; /* increased so content clears the fixed mobile bottom navbar even when wrapped */
   min-width: 259px;
 }
 
@@ -386,9 +386,24 @@ main {
   background: var(--onyx);
   font-size: 13px;
   font-weight: var(--fw-600);
-  width: max-content;
+  width: fit-content;
+  max-width: 100%;
+  white-space: normal;
+  text-align: center;
   padding: 3px 12px;
   border-radius: 8px;
+  line-height: 1.4;
+}
+
+.hero-tagline {
+  color: var(--light-gray);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-300);
+  line-height: 1.6;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding-top: 15px;
+  border-top: 1px solid var(--jet);
 }
 
 .info_more-btn {
@@ -427,6 +442,14 @@ main {
 
 .info_more-btn span {
   display: none;
+}
+
+.info_more-btn ion-icon {
+  transition: transform var(--transition-1);
+}
+
+.sidebar.active .info_more-btn ion-icon {
+  transform: rotate(180deg);
 }
 
 .sidebar-info_more {
@@ -1530,6 +1553,49 @@ textarea.form-input::-webkit-resizer {
 
 .form-btn:disabled:hover::before {
   background: var(--bg-gradient-jet);
+}
+
+/* Form submission response messages styling */
+.form-response {
+  margin-top: 20px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: var(--fs-6);
+  font-weight: var(--fw-400);
+  display: none;
+  text-align: center;
+  line-height: 1.5;
+  animation: formResponseFadeIn 0.35s ease forwards;
+}
+
+.form-response.success {
+  display: block;
+  background: hsla(142, 70%, 45%, 0.1);
+  border: 1px solid hsla(142, 70%, 45%, 0.25);
+  color: #2ec4b6;
+}
+
+.form-response.error {
+  display: block;
+  background: hsla(354, 70%, 54%, 0.1);
+  border: 1px solid hsla(354, 70%, 54%, 0.25);
+  color: #ff5a5f;
+}
+
+/* Loading spinner animation for submit button */
+.form-btn.loading ion-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes formResponseFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 
@@ -3649,4 +3715,296 @@ textarea.form-input::-webkit-resizer {
   color: var(--light-gray);
   font-weight: var(--fw-500);
   font-size: var(--fs-8);
+}
+
+
+/* ====================================================
+   MOBILE UI FIXES
+   Comprehensive responsive improvements for small screens
+   ==================================================== */
+
+/* --------------------------------------------------
+   Very small phones (< 360px)
+   -------------------------------------------------- */
+@media (max-width: 359px) {
+  /* Sidebar: tighter on tiny phones */
+  .sidebar {
+    padding: 12px;
+  }
+
+  /* Reduce article padding */
+  .sidebar,
+  article {
+    padding: 12px;
+  }
+
+  /* Avoid names being clipped */
+  .info-content .name {
+    font-size: 14px;
+  }
+
+  /* languages grid: single column on very tiny screens */
+  .languages-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* skills: 2 columns is still fine at 360px */
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  /* Interactive tech grid: single column */
+  .interactive-tech-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Visitor counter: reduce font */
+  .vc-num {
+    font-size: var(--fs-4);
+  }
+}
+
+/* --------------------------------------------------
+   Small phones (360px – 479px)
+   -------------------------------------------------- */
+@media (max-width: 479px) {
+  /* Resume center: stack label and buttons vertically */
+  .resume-center {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .resume-center .title-wrapper {
+    width: 100%;
+  }
+
+  /* Buttons: full width row, equal split */
+  .rc-btn-group {
+    width: 100%;
+    justify-content: stretch;
+    gap: 8px;
+  }
+
+  .rc-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 10px 8px;
+    font-size: var(--fs-8);
+    min-height: 42px; /* accessible touch target */
+    text-align: center;
+  }
+
+  /* Skills grid: 2 columns max */
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .skill-card {
+    padding: 14px 10px 10px;
+  }
+
+  .skill-card-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+
+  /* Languages grid: 2 columns on small phones */
+  .languages-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Interactive tech cards: tighter padding */
+  .itc {
+    padding: 11px 10px;
+  }
+
+  .itc-name {
+    font-size: 11px;
+  }
+
+  /* Contact form: ensure inputs don't overflow */
+  .contact-form-col,
+  .contact-map-col {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .form-input {
+    font-size: var(--fs-7);
+  }
+
+  /* Form submit button: full width always on mobile */
+  .form-btn {
+    width: 100%;
+  }
+
+  /* Form response message: smaller font */
+  .form-response {
+    font-size: var(--fs-7);
+  }
+
+  /* Coding header: stack sync bar below title */
+  .coding-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .sync-status-container {
+    width: 100%;
+    margin-top: 0;
+    justify-content: space-between;
+  }
+
+  /* Visitor counter: tighter cards */
+  .vc-card {
+    padding: 12px 6px;
+  }
+
+  .vc-num {
+    font-size: var(--fs-3);
+  }
+
+  /* Cert tiles: full-width on tiny phones */
+  .cert-tile {
+    min-width: 220px;
+  }
+
+  /* Timeline: tighten left margin */
+  .timeline-list {
+    margin-left: 30px;
+  }
+
+  /* Hero CTA buttons: full width stack */
+  .hero-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Navbar: slightly smaller text */
+  .navbar-link {
+    font-size: 9px;
+    padding: 12px 4px !important;
+  }
+
+  /* Article title: smaller on tiny screens */
+  .h2 {
+    font-size: 20px;
+  }
+}
+
+/* --------------------------------------------------
+   Medium-small phones (480px – 579px)
+   -------------------------------------------------- */
+@media (min-width: 480px) and (max-width: 579px) {
+  /* Resume center: still stack vertically */
+  .resume-center {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px;
+    gap: 14px;
+  }
+
+  .rc-btn-group {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .rc-btn {
+    min-height: 42px;
+  }
+
+  /* Skills grid: 3 columns OK at 480px+ */
+  .skills-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Coding header: keep stacked */
+  .coding-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .sync-status-container {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+/* --------------------------------------------------
+   Safe touch targets for all interactive mobile buttons
+   (applies across all mobile sizes)
+   -------------------------------------------------- */
+@media (max-width: 1023px) {
+  /* Minimum 44px touch targets per WCAG */
+  .form-btn,
+  .cp-visit-btn,
+  .rc-btn,
+  .hero-btn,
+  .sync-btn {
+    min-height: 44px;
+  }
+
+  /* Social links: adequate tap area */
+  .social-item .social-link {
+    width: 42px;
+    height: 42px;
+  }
+
+  /* Navbar links: adequate tap zone */
+  .navbar-link {
+    padding: 14px 6px !important;
+  }
+
+  /* Sidebar info_more toggle: accessible tap zone */
+  .info_more-btn {
+    padding: 12px;
+  }
+
+  /* Prevent horizontal overflow on article pages */
+  article {
+    overflow-x: hidden;
+  }
+
+  /* Interactive tech grid: 2 columns max on mobile */
+  .interactive-tech-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Itc detail: allow more height on mobile so text isn't clipped */
+  .itc:hover .itc-detail,
+  .itc:focus .itc-detail,
+  .itc.active .itc-detail {
+    max-height: 200px;
+  }
+
+  /* Projects list: single column on mobile */
+  .project-list {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Coding profiles grid: single column on mobile */
+  .coding-profiles-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Sidebar active: prevent clipping on tall content */
+  .sidebar.active {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .sidebar-info_more {
+    overflow: visible;
+  }
 }

@@ -141,7 +141,8 @@
             </li>
 
             <li class="social-item">
-              <a href="https://www.instagram.com/_.fatima._.03?igsh=Z2E3YXl6MXdxb3Bn" target="_blank" class="social-link">
+              <a href="https://www.instagram.com/_.fatima._.03?igsh=Z2E3YXl6MXdxb3Bn" target="_blank"
+                class="social-link">
                 <ion-icon name="logo-instagram"></ion-icon>
               </a>
             </li>
@@ -376,7 +377,6 @@
         <section class="tech-stack">
 
           <h3 class="h3 tech-stack-title">Tech Stack</h3>
-          <p class="tech-stack-hint">Hover or tap a card to explore details</p>
 
           <div class="interactive-tech-grid">
 
@@ -532,7 +532,8 @@
                   <span><ion-icon name="time-outline"></ion-icon> 2+ Years</span>
                   <span><ion-icon name="folder-outline"></ion-icon> 8+ Projects</span>
                 </div>
-                <p class="itc-desc">Designing, implementing, and integrating secure, scalable RESTful web services and APIs.</p>
+                <p class="itc-desc">Designing, implementing, and integrating secure, scalable RESTful web services and
+                  APIs.</p>
               </div>
             </div>
 
@@ -838,13 +839,14 @@
           </div>
 
           <div class="rc-btn-group">
-            <a href="https://drive.google.com/drive/folders/1EFgBK9N5Mv3l5Ruf827p_WI6-JpFcNXN?usp=sharing"
+            <a href="https://docs.google.com/document/d/16MOYq-DrcYxiJAFK8MLgQpf_J8F_A93J/edit?usp=sharing&ouid=109066507954215963760&rtpof=true&sd=true"
               target="_blank" class="rc-btn primary">
               <ion-icon name="eye-outline"></ion-icon>
               View Resume
             </a>
-            <a href="https://drive.google.com/drive/folders/1EFgBK9N5Mv3l5Ruf827p_WI6-JpFcNXN?usp=sharing"
-              target="_blank" class="rc-btn secondary">
+            <!-- Download Resume: uses Google Docs export URL to trigger direct PDF download -->
+            <a href="https://docs.google.com/document/d/16MOYq-DrcYxiJAFK8MLgQpf_J8F_A93J/export?format=pdf"
+              target="_blank" download="Adeeba_Fatima_Zaidi_Resume.pdf" class="rc-btn secondary">
               <ion-icon name="download-outline"></ion-icon>
               Download Resume
             </a>
@@ -1478,34 +1480,6 @@
 
           <h3 class="h3 coding-section-title">GitHub Statistics</h3>
 
-          <div class="gh-stats-grid" id="githubStatsGrid">
-
-            <div class="gh-stat-card">
-              <div class="gh-stat-icon"><ion-icon name="folder-open-outline"></ion-icon></div>
-              <div class="gh-stat-num" id="ghRepos">--</div>
-              <div class="gh-stat-label">Repositories</div>
-            </div>
-
-            <div class="gh-stat-card">
-              <div class="gh-stat-icon"><ion-icon name="people-outline"></ion-icon></div>
-              <div class="gh-stat-num" id="ghFollowers">--</div>
-              <div class="gh-stat-label">Followers</div>
-            </div>
-
-            <div class="gh-stat-card">
-              <div class="gh-stat-icon"><ion-icon name="star-outline"></ion-icon></div>
-              <div class="gh-stat-num" id="ghStars">--</div>
-              <div class="gh-stat-label">Total Stars</div>
-            </div>
-
-            <div class="gh-stat-card">
-              <div class="gh-stat-icon"><ion-icon name="git-commit-outline"></ion-icon></div>
-              <div class="gh-stat-num" id="ghContributions">--</div>
-              <div class="gh-stat-label">Contributions</div>
-            </div>
-
-          </div>
-
 
           <!-- GitHub Streak & Top Languages charts -->
           <div class="gh-charts">
@@ -1519,7 +1493,7 @@
 
             <div class="gh-chart-item">
               <h4 class="gh-chart-title">Most Used Languages</h4>
-              
+
               <div class="language-bar">
                 <span style="width: 24%; background-color: #c9a600;" title="JavaScript: 24%"></span>
                 <span style="width: 24%; background-color: #e34f26;" title="HTML: 24%"></span>
@@ -1732,14 +1706,21 @@
 
               <h3 class="h3 form-title">Contact Form</h3>
 
-              <form action="https://formsubmit.co/adeebafatima2703@gmail.com" method="POST" class="form" data-form>
+              <!-- ═══════════════════════════════════════════════════════
+                   CHANGED: Replaced FormSubmit with Web3Forms
+                   - Removed: action="https://formsubmit.co/..." method="POST"
+                   - Removed: FormSubmit hidden fields (_captcha, _subject, _template)
+                   - Added:   Web3Forms hidden access_key field
+                   - Added:   data-form-response div for success/error feedback
+                   - Submission is now handled via JavaScript fetch API (script.js)
+                   ═══════════════════════════════════════════════════════ -->
+              <form class="form" data-form novalidate>
 
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_subject" value="New message from Portfolio">
-                <input type="hidden" name="_template" value="table">
+                <!-- Web3Forms access key -->
+                <input type="hidden" name="access_key" value="aee06194-7cd1-4956-9b65-e940c821a67e">
 
                 <div class="input-wrapper">
-                  <input type="text" name="fullname" class="form-input" placeholder="Full name" required
+                  <input type="text" name="name" class="form-input" placeholder="Full name" required
                     data-form-input>
 
                   <input type="email" name="email" class="form-input" placeholder="Email address" required
@@ -1753,6 +1734,9 @@
                   <ion-icon name="paper-plane"></ion-icon>
                   <span>Send Message</span>
                 </button>
+
+                <!-- Success / error feedback message rendered by script.js -->
+                <div class="form-response" data-form-response aria-live="polite"></div>
 
               </form>
 

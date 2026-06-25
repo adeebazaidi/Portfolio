@@ -21,8 +21,9 @@ sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); }
 const form = document.querySelector("[data-form]");
 const formInputs = document.querySelectorAll("[data-form-input]");
 const formBtn = document.querySelector("[data-form-btn]");
+const formResponse = document.querySelector("[data-form-response]");
 
-// add event to all form input fields
+// add event to all form input fields (real-time validation)
 if (form && formBtn) {
   for (let i = 0; i < formInputs.length; i++) {
     formInputs[i].addEventListener("input", function () {
@@ -36,6 +37,83 @@ if (form && formBtn) {
 
     });
   }
+
+  // Handle Web3Forms Submission via Javascript Fetch API
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    // Double check form validation before submit
+    if (!form.checkValidity()) {
+      return;
+    }
+
+    // Cache original button elements and states
+    const btnText = formBtn.querySelector("span");
+    const btnIcon = formBtn.querySelector("ion-icon");
+    const originalText = btnText ? btnText.textContent : "Send Message";
+    const originalIconName = btnIcon ? btnIcon.getAttribute("name") : "paper-plane";
+
+    // Show loading state
+    formBtn.setAttribute("disabled", "");
+    formBtn.classList.add("loading");
+    if (btnText) btnText.textContent = "Sending...";
+    if (btnIcon) {
+      btnIcon.setAttribute("name", "refresh-outline");
+    }
+
+    // Reset message box
+    if (formResponse) {
+      formResponse.className = "form-response";
+      formResponse.textContent = "";
+    }
+
+    // Prepare form data
+    const formData = new FormData(form);
+    const jsonObject = Object.fromEntries(formData.entries());
+    const jsonString = JSON.stringify(jsonObject);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: jsonString
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        // Success behavior
+        if (formResponse) {
+          formResponse.classList.add("success");
+          formResponse.textContent = result.message || "Thank you! Your message has been sent successfully.";
+        }
+        form.reset();
+        
+        // Re-disable the submit button since the form is now empty/reset
+        formBtn.setAttribute("disabled", "");
+      } else {
+        // API Error behavior
+        throw new Error(result.message || "Failed to submit form. Please check your credentials.");
+      }
+    } catch (error) {
+      console.error("Submission Error:", error);
+      if (formResponse) {
+        formResponse.classList.add("error");
+        formResponse.textContent = error.message || "An error occurred while sending your message. Please check your connection.";
+      }
+      
+      // Re-enable button on error so the user can try again
+      formBtn.removeAttribute("disabled");
+    } finally {
+      // Revert loading state
+      formBtn.classList.remove("loading");
+      if (btnText) btnText.textContent = originalText;
+      if (btnIcon) btnIcon.setAttribute("name", originalIconName);
+    }
+  });
 }
 
 
@@ -253,19 +331,9 @@ const updateUIStats = function (statsData) {
   // Update GitHub stats
   if (statsData && statsData.github) {
     const gh = statsData.github;
-    const ghReposEl = document.getElementById("ghRepos");
-    const ghFollowersEl = document.getElementById("ghFollowers");
-    const ghStarsEl = document.getElementById("ghStars");
-    const ghContributionsEl = document.getElementById("ghContributions");
-
     const cpGhReposEl = document.getElementById("cpGhRepos");
     const cpGhFollowersEl = document.getElementById("cpGhFollowers");
     const cpGhStarsEl = document.getElementById("cpGhStars");
-
-    if (ghReposEl) animateCountUp(ghReposEl, parseInt(ghReposEl.textContent) || 0, gh.repos, 1200);
-    if (ghFollowersEl) animateCountUp(ghFollowersEl, parseInt(ghFollowersEl.textContent) || 0, gh.followers, 1200);
-    if (ghStarsEl) animateCountUp(ghStarsEl, parseInt(ghStarsEl.textContent) || 0, gh.stars, 1200);
-    if (ghContributionsEl) animateCountUp(ghContributionsEl, parseInt(ghContributionsEl.textContent) || 0, gh.contributions, 1200);
 
     if (cpGhReposEl) animateCountUp(cpGhReposEl, parseInt(cpGhReposEl.textContent) || 0, gh.repos, 1000);
     if (cpGhFollowersEl) animateCountUp(cpGhFollowersEl, parseInt(cpGhFollowersEl.textContent) || 0, gh.followers, 1000);
