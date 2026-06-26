@@ -1548,6 +1548,91 @@
         </section>
 
 
+        <!-- LeetCode Statistics Section -->
+        <section class="leetcode-stats-section">
+
+          <h3 class="h3 coding-section-title">LeetCode Statistics</h3>
+
+          <div class="lc-stats-layout">
+
+            <!-- Donut ring chart -->
+            <div class="lc-ring-wrapper">
+              <svg class="lc-ring-svg" viewBox="0 0 120 120" aria-hidden="true">
+                <!-- track -->
+                <circle class="lc-ring-track" cx="60" cy="60" r="50" />
+                <!-- hard arc (red) -->
+                <circle class="lc-ring-seg lc-ring-hard" id="lcRingHard" cx="60" cy="60" r="50"
+                  stroke-dasharray="0 314.16" />
+                <!-- medium arc (yellow) -->
+                <circle class="lc-ring-seg lc-ring-medium" id="lcRingMedium" cx="60" cy="60" r="50"
+                  stroke-dasharray="0 314.16" />
+                <!-- easy arc (green) -->
+                <circle class="lc-ring-seg lc-ring-easy" id="lcRingEasy" cx="60" cy="60" r="50"
+                  stroke-dasharray="0 314.16" />
+              </svg>
+              <div class="lc-ring-center">
+                <span class="lc-ring-total" id="lcRingTotal">--</span>
+                <span class="lc-ring-label">Solved</span>
+              </div>
+            </div>
+
+            <!-- Stats breakdown -->
+            <div class="lc-stats-breakdown">
+
+              <!-- Total solved hero -->
+              <div class="lc-hero-stat">
+                <span class="lc-hero-num" id="lcHeroTotal">--</span>
+                <span class="lc-hero-sub">Problems Solved</span>
+              </div>
+
+              <!-- Difficulty rows -->
+              <div class="lc-diff-list">
+
+                <div class="lc-diff-row">
+                  <div class="lc-diff-left">
+                    <span class="lc-diff-badge easy">Easy</span>
+                  </div>
+                  <div class="lc-diff-bar-wrap">
+                    <div class="lc-diff-bar-track">
+                      <div class="lc-diff-bar-fill easy" id="lcBarEasy" style="width:0%"></div>
+                    </div>
+                  </div>
+                  <span class="lc-diff-count" id="lcCountEasy">--</span>
+                </div>
+
+                <div class="lc-diff-row">
+                  <div class="lc-diff-left">
+                    <span class="lc-diff-badge medium">Medium</span>
+                  </div>
+                  <div class="lc-diff-bar-wrap">
+                    <div class="lc-diff-bar-track">
+                      <div class="lc-diff-bar-fill medium" id="lcBarMedium" style="width:0%"></div>
+                    </div>
+                  </div>
+                  <span class="lc-diff-count" id="lcCountMedium">--</span>
+                </div>
+
+                <div class="lc-diff-row">
+                  <div class="lc-diff-left">
+                    <span class="lc-diff-badge hard">Hard</span>
+                  </div>
+                  <div class="lc-diff-bar-wrap">
+                    <div class="lc-diff-bar-track">
+                      <div class="lc-diff-bar-fill hard" id="lcBarHard" style="width:0%"></div>
+                    </div>
+                  </div>
+                  <span class="lc-diff-count" id="lcCountHard">--</span>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
         <!-- Coding Platform Profiles -->
         <section class="coding-profiles-section">
 
@@ -1615,6 +1700,10 @@
                 <div class="cp-stat">
                   <span class="cp-stat-num" id="lcMedium">--</span>
                   <span class="cp-stat-label">Medium</span>
+                </div>
+                <div class="cp-stat">
+                  <span class="cp-stat-num" id="lcHard">--</span>
+                  <span class="cp-stat-label">Hard</span>
                 </div>
               </div>
               <div class="cp-achievements">

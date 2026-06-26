@@ -264,6 +264,11 @@ techCards.forEach(function (card) {
       card.click();
     }
   });
+
+  // Prevent card from getting stuck open on desktop
+  card.addEventListener("mouseleave", function () {
+    card.classList.remove("active");
+  });
 });
 
 
@@ -291,8 +296,79 @@ const animateCountUp = function (el, from, to, duration) {
 // Live Statistics Synchronization (GitHub, LeetCode, LinkedIn & Local DOM)
 // -----------------------------------------------
 
-const CACHE_KEY = "pf_stats_cache";
+const CACHE_KEY = "pf_stats_cache_v3"; // v3: fixed 0 falsy bug, removed fake data defaults
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes cache validity
+
+// Animate the LeetCode difficulty ring chart
+const updateLeetCodeChart = function (lc) {
+  if (!lc) return;
+
+  const CIRC = 2 * Math.PI * 50; // ≈ 314.16
+  const total  = lc.solved  || 0;
+  const easy   = lc.easy    || 0;
+  const medium = lc.medium  || 0;
+  const hard   = lc.hard    || 0;
+
+  // Update ring center total
+  const ringTotalEl = document.getElementById("lcRingTotal");
+  if (ringTotalEl) animateCountUp(ringTotalEl, parseInt(ringTotalEl.textContent) || 0, total, 900);
+
+  // Update hero total
+  const heroTotalEl = document.getElementById("lcHeroTotal");
+  if (heroTotalEl) animateCountUp(heroTotalEl, parseInt(heroTotalEl.textContent) || 0, total, 900);
+
+  // Update difficulty count labels
+  const easyCountEl   = document.getElementById("lcCountEasy");
+  const medCountEl    = document.getElementById("lcCountMedium");
+  const hardCountEl   = document.getElementById("lcCountHard");
+  if (easyCountEl)  animateCountUp(easyCountEl,  parseInt(easyCountEl.textContent)  || 0, easy,   800);
+  if (medCountEl)   animateCountUp(medCountEl,   parseInt(medCountEl.textContent)   || 0, medium, 800);
+  if (hardCountEl)  animateCountUp(hardCountEl,  parseInt(hardCountEl.textContent)  || 0, hard,   800);
+
+  // Update progress bars (percentage of total solved)
+  const safeTotal = total || 1;
+  const barEasy   = document.getElementById("lcBarEasy");
+  const barMedium = document.getElementById("lcBarMedium");
+  const barHard   = document.getElementById("lcBarHard");
+  if (barEasy)   setTimeout(function () { barEasy.style.width   = (easy   / safeTotal * 100).toFixed(1) + "%"; }, 200);
+  if (barMedium) setTimeout(function () { barMedium.style.width = (medium / safeTotal * 100).toFixed(1) + "%"; }, 300);
+  if (barHard)   setTimeout(function () { barHard.style.width   = (hard   / safeTotal * 100).toFixed(1) + "%"; }, 400);
+
+  // Animate SVG ring arcs (stroke-dasharray: arc gap)
+  // Drawing order: easy on bottom, medium on top, hard topmost
+  // Each arc's dashoffset is offset by the preceding arcs
+  const easyLen   = (easy   / safeTotal) * CIRC;
+  const medLen    = (medium / safeTotal) * CIRC;
+  const hardLen   = (hard   / safeTotal) * CIRC;
+
+  const easyArc   = document.getElementById("lcRingEasy");
+  const medArc    = document.getElementById("lcRingMedium");
+  const hardArc   = document.getElementById("lcRingHard");
+
+  const GAP = 2; // small gap between segments
+
+  // Easy segment starts at 0 (we rotate the SVG -90deg in CSS)
+  if (easyArc) {
+    setTimeout(function () {
+      easyArc.style.strokeDasharray  = (easyLen - GAP) + " " + (CIRC - (easyLen - GAP));
+      easyArc.style.strokeDashoffset = "0";
+    }, 150);
+  }
+  // Medium segment starts after easy
+  if (medArc) {
+    setTimeout(function () {
+      medArc.style.strokeDasharray  = (medLen - GAP) + " " + (CIRC - (medLen - GAP));
+      medArc.style.strokeDashoffset = -easyLen + "";
+    }, 200);
+  }
+  // Hard segment starts after easy + medium
+  if (hardArc) {
+    setTimeout(function () {
+      hardArc.style.strokeDasharray  = (hardLen - GAP) + " " + (CIRC - (hardLen - GAP));
+      hardArc.style.strokeDashoffset = -(easyLen + medLen) + "";
+    }, 250);
+  }
+};
 
 // Dynamic local DOM calculations for Projects, Certifications, and Internships
 const updateUIStats = function (statsData) {
@@ -351,18 +427,23 @@ const updateUIStats = function (statsData) {
     const lcSolvedEl = document.getElementById("lcSolved");
     const lcEasyEl = document.getElementById("lcEasy");
     const lcMediumEl = document.getElementById("lcMedium");
+    const lcHardEl = document.getElementById("lcHard");
 
     if (lcSolvedEl) animateCountUp(lcSolvedEl, parseInt(lcSolvedEl.textContent) || 0, lc.solved, 900);
     if (lcEasyEl) animateCountUp(lcEasyEl, parseInt(lcEasyEl.textContent) || 0, lc.easy, 900);
     if (lcMediumEl) animateCountUp(lcMediumEl, parseInt(lcMediumEl.textContent) || 0, lc.medium, 900);
+    if (lcHardEl) animateCountUp(lcHardEl, parseInt(lcHardEl.textContent) || 0, lc.hard || 0, 900);
+
+    // Drive the full LeetCode chart
+    updateLeetCodeChart(lc);
   }
 };
 
 // Fetch live statistics from official GitHub & LeetCode APIs + unofficial Contributions scraper API
 const fetchAllStatsAPI = async function () {
   const stats = {
-    github: { repos: 31, followers: 15, stars: 4, contributions: 160 },
-    leetcode: { solved: 10, easy: 9, medium: 1 }
+    github: { repos: 0, followers: 0, stars: 0, contributions: 0 },
+    leetcode: { solved: 0, easy: 0, medium: 0, hard: 0 }
   };
 
   try {
@@ -377,15 +458,17 @@ const fetchAllStatsAPI = async function () {
       stats.github.repos = user.public_repos;
       stats.github.followers = user.followers;
 
-      const repos = reposRes.ok ? await reposRes.json() : [];
-      stats.github.stars = repos.reduce(function (s, r) { return s + r.stargazers_count; }, 0);
+      if (reposRes.ok) {
+        const repos = await reposRes.json();
+        stats.github.stars = repos.reduce(function (s, r) { return s + r.stargazers_count; }, 0);
+      }
     }
   } catch (err) {
     console.warn("GitHub API error:", err.message);
   }
 
   try {
-    // 2. Fetch GitHub total contributions
+    // 3. Fetch GitHub total contributions
     const contribRes = await fetch("https://github-contributions-api.jogruber.de/v4/adeebazaidi");
     if (contribRes.ok) {
       const data = await contribRes.json();
@@ -402,13 +485,25 @@ const fetchAllStatsAPI = async function () {
   }
 
   try {
-    // 3. Fetch LeetCode statistics
-    const lcRes = await fetch("https://alfa-leetcode-api.onrender.com/userProfile/adeeba_27");
+    // 4. Fetch LeetCode statistics using the /solved endpoint (gives easy+medium+hard)
+    const lcRes = await fetch("https://alfa-leetcode-api.onrender.com/adeeba_27/solved");
     if (lcRes.ok) {
       const data = await lcRes.json();
-      stats.leetcode.solved = data.totalSolved || 10;
-      stats.leetcode.easy = data.easySolved || 9;
-      stats.leetcode.medium = data.mediumSolved || 1;
+      // Response: { solvedProblem, easySolved, mediumSolved, hardSolved, ... }
+      stats.leetcode.solved = data.solvedProblem !== undefined ? data.solvedProblem : (data.totalSolved !== undefined ? data.totalSolved : stats.leetcode.solved);
+      stats.leetcode.easy   = data.easySolved !== undefined ? data.easySolved : stats.leetcode.easy;
+      stats.leetcode.medium = data.mediumSolved !== undefined ? data.mediumSolved : stats.leetcode.medium;
+      stats.leetcode.hard   = data.hardSolved !== undefined ? data.hardSolved : stats.leetcode.hard;
+    } else {
+      // Fallback: try the userProfile endpoint
+      const lcRes2 = await fetch("https://alfa-leetcode-api.onrender.com/userProfile/adeeba_27");
+      if (lcRes2.ok) {
+        const data2 = await lcRes2.json();
+        stats.leetcode.solved = data2.totalSolved !== undefined ? data2.totalSolved : stats.leetcode.solved;
+        stats.leetcode.easy   = data2.easySolved !== undefined ? data2.easySolved : stats.leetcode.easy;
+        stats.leetcode.medium = data2.mediumSolved !== undefined ? data2.mediumSolved : stats.leetcode.medium;
+        stats.leetcode.hard   = data2.hardSolved !== undefined ? data2.hardSolved : stats.leetcode.hard;
+      }
     }
   } catch (err) {
     console.warn("LeetCode API error:", err.message);

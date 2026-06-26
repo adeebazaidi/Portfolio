@@ -2776,6 +2776,17 @@ textarea.form-input::-webkit-resizer {
   z-index: -1;
 }
 
+/* Extended invisible hit area to prevent hover jitter when transforming up */
+.itc::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  right: 0;
+  height: 15px;
+  z-index: -2;
+}
+
 .itc:hover,
 .itc:focus,
 .itc.active {
@@ -3717,6 +3728,224 @@ textarea.form-input::-webkit-resizer {
   color: var(--light-gray);
   font-weight: var(--fw-500);
   font-size: var(--fs-8);
+}
+
+
+/* ====================================================
+   LEETCODE STATS SECTION
+   ==================================================== */
+
+.leetcode-stats-section {
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--jet);
+}
+
+.lc-stats-layout {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 24px;
+  align-items: center;
+  position: relative;
+  background: var(--border-gradient-onyx);
+  border: 1px solid var(--jet);
+  border-radius: 18px;
+  padding: 24px;
+  z-index: 1;
+  transition: border-color var(--transition-1), box-shadow var(--transition-1);
+}
+
+.lc-stats-layout::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: var(--bg-gradient-jet);
+  border-radius: inherit;
+  z-index: -1;
+}
+
+.lc-stats-layout:hover {
+  border-color: #ffa116;
+  box-shadow: 0 8px 30px hsla(38, 100%, 55%, .12);
+}
+
+@media (max-width: 540px) {
+  .lc-stats-layout {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+}
+
+/* Ring SVG */
+.lc-ring-wrapper {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  flex-shrink: 0;
+}
+
+.lc-ring-svg {
+  width: 140px;
+  height: 140px;
+  transform: rotate(-90deg);
+}
+
+.lc-ring-track {
+  fill: none;
+  stroke: var(--onyx);
+  stroke-width: 14;
+}
+
+.lc-ring-seg {
+  fill: none;
+  stroke-width: 14;
+  stroke-linecap: butt;
+  transition: stroke-dasharray 1s cubic-bezier(.4,0,.2,1);
+}
+
+.lc-ring-easy   { stroke: #2d797a; }
+.lc-ring-medium { stroke: #f28a2e; }
+.lc-ring-hard   { stroke: #f63737; }
+
+.lc-ring-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.lc-ring-total {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-600);
+  line-height: 1;
+  background: var(--text-gradient-yellow);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.lc-ring-label {
+  font-size: 10px;
+  color: var(--light-gray);
+  margin-top: 3px;
+  font-weight: var(--fw-400);
+}
+
+/* Breakdown side */
+.lc-stats-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lc-hero-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.lc-hero-num {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-600);
+  color: var(--white-2);
+  line-height: 1;
+}
+
+.lc-hero-sub {
+  font-size: var(--fs-7);
+  color: var(--light-gray);
+  font-weight: var(--fw-400);
+}
+
+/* Difficulty rows */
+.lc-diff-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lc-diff-row {
+  display: grid;
+  grid-template-columns: 72px 1fr 36px;
+  align-items: center;
+  gap: 10px;
+}
+
+.lc-diff-left {
+  display: flex;
+  align-items: center;
+}
+
+.lc-diff-badge {
+  font-size: 10px;
+  font-weight: var(--fw-600);
+  border-radius: 20px;
+  padding: 3px 10px;
+  display: inline-block;
+  letter-spacing: .3px;
+}
+
+.lc-diff-badge.easy   { background: hsla(181, 46%, 32%, .15); color: #2d797a; border: 1px solid hsla(181, 46%, 32%, .30); }
+.lc-diff-badge.medium { background: hsla(29,  88%, 57%, .12); color: #f28a2e; border: 1px solid hsla(29,  88%, 57%, .28); }
+.lc-diff-badge.hard   { background: hsla(0,   91%, 59%, .12); color: #f63737; border: 1px solid hsla(0,   91%, 59%, .28); }
+
+.lc-diff-bar-wrap {
+  flex: 1;
+}
+
+.lc-diff-bar-track {
+  height: 8px;
+  background: var(--onyx);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.lc-diff-bar-fill {
+  height: 100%;
+  border-radius: 8px;
+  width: 0%;
+  transition: width 1.2s cubic-bezier(.4,0,.2,1);
+}
+
+.lc-diff-bar-fill.easy   { background: linear-gradient(90deg, #1e5253, #2d797a); }
+.lc-diff-bar-fill.medium { background: linear-gradient(90deg, #c06a1a, #f28a2e); }
+.lc-diff-bar-fill.hard   { background: linear-gradient(90deg, #c01c1c, #f63737); }
+
+.lc-diff-count {
+  font-size: var(--fs-7);
+  font-weight: var(--fw-600);
+  color: var(--white-2);
+  text-align: right;
+}
+
+/* LeetCode profile link */
+.lc-profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border-radius: 10px;
+  font-size: var(--fs-8);
+  font-weight: var(--fw-500);
+  font-family: var(--ff-poppins);
+  background: #ffa116;
+  color: #fff;
+  text-decoration: none;
+  transition: filter var(--transition-1), transform var(--transition-1);
+  align-self: flex-start;
+}
+
+.lc-profile-link:hover {
+  filter: brightness(.9);
+  transform: translateY(-1px);
+}
+
+.lc-profile-link ion-icon {
+  font-size: 14px;
+  display: inline-flex;
 }
 
 
