@@ -1488,7 +1488,7 @@
               <h4 class="gh-chart-title">Contribution Streak</h4>
               <img
                 src="https://streak-stats.demolab.com?user=adeebazaidi&theme=default&hide_border=true&date_format=M%20j%5B%2C%20Y%5D&background=FFFFFF00&ring=B82E62&fire=B82E62&currStreakLabel=B82E62"
-                alt="GitHub Contribution Streak" class="gh-chart-img" loading="lazy">
+                alt="GitHub Contribution Streak" class="gh-chart-img" loading="lazy" id="ghStreakImg">
             </div>
 
             <div class="gh-chart-item">
@@ -1553,75 +1553,88 @@
 
           <h3 class="h3 coding-section-title">LeetCode Statistics</h3>
 
-          <div class="lc-stats-layout">
+          <div class="gh-charts">
 
-            <!-- Donut ring chart -->
-            <div class="lc-ring-wrapper">
-              <svg class="lc-ring-svg" viewBox="0 0 120 120" aria-hidden="true">
-                <!-- track -->
-                <circle class="lc-ring-track" cx="60" cy="60" r="50" />
-                <!-- hard arc (red) -->
-                <circle class="lc-ring-seg lc-ring-hard" id="lcRingHard" cx="60" cy="60" r="50"
-                  stroke-dasharray="0 314.16" />
-                <!-- medium arc (yellow) -->
-                <circle class="lc-ring-seg lc-ring-medium" id="lcRingMedium" cx="60" cy="60" r="50"
-                  stroke-dasharray="0 314.16" />
-                <!-- easy arc (green) -->
-                <circle class="lc-ring-seg lc-ring-easy" id="lcRingEasy" cx="60" cy="60" r="50"
-                  stroke-dasharray="0 314.16" />
-              </svg>
-              <div class="lc-ring-center">
-                <span class="lc-ring-total" id="lcRingTotal">--</span>
-                <span class="lc-ring-label">Solved</span>
+            <!-- LeetCode Streak chart -->
+            <div class="gh-chart-item" style="display: flex; flex-direction: column; justify-content: center;">
+              <h4 class="gh-chart-title">Submission Streak</h4>
+              <div id="lcStreakSVGContainer" style="display: flex; justify-content: center; width: 100%; height: 100%; align-items: center;">
+                <!-- SVG dynamically injected by script.js -->
               </div>
             </div>
 
-            <!-- Stats breakdown -->
-            <div class="lc-stats-breakdown">
+            <!-- Problem Solving Stats -->
+            <div class="lc-stats-layout" style="margin-bottom: 0;">
 
-              <!-- Total solved hero -->
-              <div class="lc-hero-stat">
-                <span class="lc-hero-num" id="lcHeroTotal">--</span>
-                <span class="lc-hero-sub">Problems Solved</span>
+              <!-- Donut ring chart -->
+              <div class="lc-ring-wrapper">
+                <svg class="lc-ring-svg" viewBox="0 0 120 120" aria-hidden="true">
+                  <!-- track -->
+                  <circle class="lc-ring-track" cx="60" cy="60" r="50" />
+                  <!-- hard arc (red) -->
+                  <circle class="lc-ring-seg lc-ring-hard" id="lcRingHard" cx="60" cy="60" r="50"
+                    stroke-dasharray="0 314.16" />
+                  <!-- medium arc (yellow) -->
+                  <circle class="lc-ring-seg lc-ring-medium" id="lcRingMedium" cx="60" cy="60" r="50"
+                    stroke-dasharray="0 314.16" />
+                  <!-- easy arc (green) -->
+                  <circle class="lc-ring-seg lc-ring-easy" id="lcRingEasy" cx="60" cy="60" r="50"
+                    stroke-dasharray="0 314.16" />
+                </svg>
+                <div class="lc-ring-center">
+                  <span class="lc-ring-total" id="lcRingTotal">--</span>
+                  <span class="lc-ring-label">Solved</span>
+                </div>
               </div>
 
-              <!-- Difficulty rows -->
-              <div class="lc-diff-list">
+              <!-- Stats breakdown -->
+              <div class="lc-stats-breakdown">
 
-                <div class="lc-diff-row">
-                  <div class="lc-diff-left">
-                    <span class="lc-diff-badge easy">Easy</span>
-                  </div>
-                  <div class="lc-diff-bar-wrap">
-                    <div class="lc-diff-bar-track">
-                      <div class="lc-diff-bar-fill easy" id="lcBarEasy" style="width:0%"></div>
-                    </div>
-                  </div>
-                  <span class="lc-diff-count" id="lcCountEasy">--</span>
+                <!-- Total solved hero -->
+                <div class="lc-hero-stat">
+                  <span class="lc-hero-num" id="lcHeroTotal">--</span>
+                  <span class="lc-hero-sub">Problems Solved</span>
                 </div>
 
-                <div class="lc-diff-row">
-                  <div class="lc-diff-left">
-                    <span class="lc-diff-badge medium">Medium</span>
-                  </div>
-                  <div class="lc-diff-bar-wrap">
-                    <div class="lc-diff-bar-track">
-                      <div class="lc-diff-bar-fill medium" id="lcBarMedium" style="width:0%"></div>
-                    </div>
-                  </div>
-                  <span class="lc-diff-count" id="lcCountMedium">--</span>
-                </div>
+                <!-- Difficulty rows -->
+                <div class="lc-diff-list">
 
-                <div class="lc-diff-row">
-                  <div class="lc-diff-left">
-                    <span class="lc-diff-badge hard">Hard</span>
-                  </div>
-                  <div class="lc-diff-bar-wrap">
-                    <div class="lc-diff-bar-track">
-                      <div class="lc-diff-bar-fill hard" id="lcBarHard" style="width:0%"></div>
+                  <div class="lc-diff-row">
+                    <div class="lc-diff-left">
+                      <span class="lc-diff-badge easy">Easy</span>
                     </div>
+                    <div class="lc-diff-bar-wrap">
+                      <div class="lc-diff-bar-track">
+                        <div class="lc-diff-bar-fill easy" id="lcBarEasy" style="width:0%"></div>
+                      </div>
+                    </div>
+                    <span class="lc-diff-count" id="lcCountEasy">--</span>
                   </div>
-                  <span class="lc-diff-count" id="lcCountHard">--</span>
+
+                  <div class="lc-diff-row">
+                    <div class="lc-diff-left">
+                      <span class="lc-diff-badge medium">Medium</span>
+                    </div>
+                    <div class="lc-diff-bar-wrap">
+                      <div class="lc-diff-bar-track">
+                        <div class="lc-diff-bar-fill medium" id="lcBarMedium" style="width:0%"></div>
+                      </div>
+                    </div>
+                    <span class="lc-diff-count" id="lcCountMedium">--</span>
+                  </div>
+
+                  <div class="lc-diff-row">
+                    <div class="lc-diff-left">
+                      <span class="lc-diff-badge hard">Hard</span>
+                    </div>
+                    <div class="lc-diff-bar-wrap">
+                      <div class="lc-diff-bar-track">
+                        <div class="lc-diff-bar-fill hard" id="lcBarHard" style="width:0%"></div>
+                      </div>
+                    </div>
+                    <span class="lc-diff-count" id="lcCountHard">--</span>
+                  </div>
+
                 </div>
 
               </div>
