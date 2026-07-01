@@ -891,4 +891,58 @@ setTimeout(function () {
 
 
 
+// -----------------------------------------------
+// Three-Theme Cycle: light → gradient → dark → …
+// -----------------------------------------------
+
+const themeBtn  = document.querySelector("[data-theme-btn]");
+const THEMES    = ["light", "gradient", "dark"];
+
+// icons inside the button for each theme state
+const themeMoonIcon   = themeBtn ? themeBtn.querySelector(".moon")    : null;
+const themeSunIcon    = themeBtn ? themeBtn.querySelector(".sun")     : null;
+const themePaletteIcon = themeBtn ? themeBtn.querySelector(".palette"): null;
+
+// GitHub streak image URLs
+const GH_STREAK_LIGHT = "https://streak-stats.demolab.com?user=adeebazaidi&theme=default&hide_border=true&date_format=M%20j%5B%2C%20Y%5D&background=FFFFFF00&ring=B82E62&fire=B82E62&currStreakLabel=B82E62";
+const GH_STREAK_DARK  = "https://streak-stats.demolab.com?user=adeebazaidi&theme=dark&hide_border=true&date_format=M%20j%5B%2C%20Y%5D&background=00000000&ring=B82E62&fire=B82E62&currStreakLabel=B82E62&sideNums=FFFFFF&sideLabels=cccccc&dates=888888&stroke=B82E62";
+
+function applyTheme(theme) {
+  document.body.classList.remove("dark-theme", "gradient-theme");
+  if (theme === "dark")     document.body.classList.add("dark-theme");
+  if (theme === "gradient") document.body.classList.add("gradient-theme");
+  localStorage.setItem("theme", theme);
+
+  // Swap GitHub streak image src so ring/fire stay #b82e62 in all themes
+  const ghStreakImg = document.getElementById("ghStreakImg");
+  if (ghStreakImg) {
+    ghStreakImg.src = (theme === "dark" || theme === "gradient") ? GH_STREAK_DARK : GH_STREAK_LIGHT;
+  }
+
+  // swap icon
+  if (themeMoonIcon && themeSunIcon && themePaletteIcon) {
+    themeMoonIcon.style.display    = theme === "dark"     ? "block" : "none";
+    themeSunIcon.style.display     = theme === "light"    ? "block" : "none";
+    themePaletteIcon.style.display = theme === "gradient" ? "block" : "none";
+  }
+
+  if (themeBtn) themeBtn.setAttribute("aria-label", `Switch theme (current: ${theme})`);
+}
+
+// Load saved theme (default: light)
+const savedTheme = localStorage.getItem("theme");
+applyTheme(THEMES.includes(savedTheme) ? savedTheme : "light");
+
+if (themeBtn) {
+  themeBtn.addEventListener("click", function () {
+    const current = localStorage.getItem("theme") || "light";
+    const nextIdx = (THEMES.indexOf(current) + 1) % THEMES.length;
+    applyTheme(THEMES[nextIdx]);
+  });
+}
+
+
+
+
+
 
