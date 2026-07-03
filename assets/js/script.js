@@ -301,7 +301,7 @@ const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes cache validity
 
 // GitHub streak image URLs
 const GH_STREAK_LIGHT = "https://streak-stats.demolab.com?user=adeebazaidi&theme=default&hide_border=true&date_format=M%20j%5B%2C%20Y%5D&background=FFFFFF00&ring=B82E62&fire=B82E62&currStreakLabel=B82E62";
-const GH_STREAK_DARK  = "https://streak-stats.demolab.com?user=adeebazaidi&theme=dark&hide_border=true&date_format=M%20j%5B%2C%20Y%5D&background=00000000&ring=B82E62&fire=B82E62&currStreakLabel=B82E62&sideNums=FFFFFF&sideLabels=cccccc&dates=888888&stroke=B82E62";
+const GH_STREAK_DARK  = "https://streak-stats.demolab.com?user=adeebazaidi&theme=dark&hide_border=true&date_format=M%20j%5B%2C%20Y%5D&background=00000000&ring=B82E62&fire=B82E62&currStreakLabel=B82E62&currStreakNum=FFFFFF&sideNums=FFFFFF&sideLabels=cccccc&dates=888888&stroke=B82E62";
 
 // Animate the LeetCode difficulty ring chart
 const updateLeetCodeChart = function (lc) {
@@ -421,14 +421,12 @@ const updateUIStats = function (statsData) {
 
     if (githubCommitsCountEl) animateCountUp(githubCommitsCountEl, parseInt(githubCommitsCountEl.textContent) || 0, gh.contributions, 1000);
 
-    // Refresh GitHub streak image based on current theme
-    const ghStreakImg = document.getElementById("ghStreakImg");
-    if (ghStreakImg) {
-      const currentTheme = localStorage.getItem("theme") || "light";
-      const baseSrc = (currentTheme === "dark" || currentTheme === "gradient") ? GH_STREAK_DARK : GH_STREAK_LIGHT;
-      const newTs = "&_t=" + Date.now();
-      ghStreakImg.src = baseSrc + newTs;
-    }
+    // Refresh GitHub streak images
+    const ghStreakImgLight = document.getElementById("ghStreakImgLight");
+    const ghStreakImgDark = document.getElementById("ghStreakImgDark");
+    const newTs = "&_t=" + Date.now();
+    if (ghStreakImgLight) ghStreakImgLight.src = GH_STREAK_LIGHT + newTs;
+    if (ghStreakImgDark) ghStreakImgDark.src = GH_STREAK_DARK + newTs;
   } else {
     // Basic estimations/defaults if cached data or fetch fails
     if (githubCommitsCountEl) githubCommitsCountEl.textContent = "160+";

@@ -3256,6 +3256,12 @@ textarea.form-input::-webkit-resizer {
   padding: 16px;
   z-index: 1;
   overflow: hidden;
+  transition: border-color var(--transition-1), box-shadow var(--transition-1);
+}
+
+.gh-chart-item:hover {
+  border-color: #ffa116;
+  box-shadow: 0 8px 30px hsla(38, 100%, 55%, .12);
 }
 
 .gh-chart-item::before {
@@ -4416,4 +4422,17 @@ body.gradient-theme #lcStreakSVGContainer text[fill='#151515'] {
 
 body.gradient-theme #lcStreakSVGContainer text[fill='#464646'] {
   fill: var(--light-gray) !important;
+}
+
+/* GitHub Streak Dual-Image Toggle */
+.gh-streak-dark { display: none; }
+
+body.dark-theme .gh-streak-light,
+body.gradient-theme .gh-streak-light {
+  display: none;
+}
+
+body.dark-theme .gh-streak-dark,
+body.gradient-theme .gh-streak-dark {
+  display: block;
 }
