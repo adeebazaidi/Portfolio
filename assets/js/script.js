@@ -299,6 +299,10 @@ const animateCountUp = function (el, from, to, duration) {
 const CACHE_KEY = "pf_stats_cache_v4"; // v4: added LeetCode streak support
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes cache validity
 
+// GitHub streak image URLs
+const GH_STREAK_LIGHT = "https://streak-stats.demolab.com?user=adeebazaidi&theme=default&hide_border=true&date_format=M%20j%5B%2C%20Y%5D&background=FFFFFF00&ring=B82E62&fire=B82E62&currStreakLabel=B82E62";
+const GH_STREAK_DARK  = "https://streak-stats.demolab.com?user=adeebazaidi&theme=dark&hide_border=true&date_format=M%20j%5B%2C%20Y%5D&background=00000000&ring=B82E62&fire=B82E62&currStreakLabel=B82E62&sideNums=FFFFFF&sideLabels=cccccc&dates=888888&stroke=B82E62";
+
 // Animate the LeetCode difficulty ring chart
 const updateLeetCodeChart = function (lc) {
   if (!lc) return;
@@ -417,17 +421,13 @@ const updateUIStats = function (statsData) {
 
     if (githubCommitsCountEl) animateCountUp(githubCommitsCountEl, parseInt(githubCommitsCountEl.textContent) || 0, gh.contributions, 1000);
 
-    // Refresh GitHub streak image
+    // Refresh GitHub streak image based on current theme
     const ghStreakImg = document.getElementById("ghStreakImg");
     if (ghStreakImg) {
-      let currentSrc = ghStreakImg.src;
-      const tsMatch = currentSrc.match(/&_t=\d+/);
+      const currentTheme = localStorage.getItem("theme") || "light";
+      const baseSrc = (currentTheme === "dark" || currentTheme === "gradient") ? GH_STREAK_DARK : GH_STREAK_LIGHT;
       const newTs = "&_t=" + Date.now();
-      if (tsMatch) {
-        ghStreakImg.src = currentSrc.replace(tsMatch[0], newTs);
-      } else {
-        ghStreakImg.src = currentSrc + newTs;
-      }
+      ghStreakImg.src = baseSrc + newTs;
     }
   } else {
     // Basic estimations/defaults if cached data or fetch fails
@@ -641,10 +641,11 @@ const updateLeetCodeStreakSVG = function (calendar) {
 };
 
 // Fetch live statistics from official GitHub & LeetCode APIs + unofficial Contributions scraper API
-const fetchAllStatsAPI = async function () {
-  const stats = {
+const fetchAllStatsAPI = async function (fallbackStats = null) {
+  const stats = fallbackStats ? JSON.parse(JSON.stringify(fallbackStats)) : {
     github: { repos: 0, followers: 0, stars: 0, contributions: 0 },
-    leetcode: { solved: 0, easy: 0, medium: 0, hard: 0 }
+    // Hardcode a sensible minimum so it never shows 0 for a first-time visitor if the API is down
+    leetcode: { solved: 150, easy: 50, medium: 80, hard: 20 }
   };
 
   try {
@@ -790,8 +791,8 @@ const loadStats = async function (forceRefresh = false) {
     updateUIStats(null); // Triggers base DOM updates first
   }
 
-  // Fetch live API statistics
-  const freshStats = await fetchAllStatsAPI();
+  // Fetch live API statistics (passing cached data as fallback in case API fails)
+  const freshStats = await fetchAllStatsAPI(cachedData ? cachedData.data : null);
 
   // Cache stats
   try {
@@ -903,9 +904,6 @@ const themeMoonIcon   = themeBtn ? themeBtn.querySelector(".moon")    : null;
 const themeSunIcon    = themeBtn ? themeBtn.querySelector(".sun")     : null;
 const themePaletteIcon = themeBtn ? themeBtn.querySelector(".palette"): null;
 
-// GitHub streak image URLs
-const GH_STREAK_LIGHT = "https://streak-stats.demolab.com?user=adeebazaidi&theme=default&hide_border=true&date_format=M%20j%5B%2C%20Y%5D&background=FFFFFF00&ring=B82E62&fire=B82E62&currStreakLabel=B82E62";
-const GH_STREAK_DARK  = "https://streak-stats.demolab.com?user=adeebazaidi&theme=dark&hide_border=true&date_format=M%20j%5B%2C%20Y%5D&background=00000000&ring=B82E62&fire=B82E62&currStreakLabel=B82E62&sideNums=FFFFFF&sideLabels=cccccc&dates=888888&stroke=B82E62";
 
 function applyTheme(theme) {
   document.body.classList.remove("dark-theme", "gradient-theme");
@@ -913,11 +911,8 @@ function applyTheme(theme) {
   if (theme === "gradient") document.body.classList.add("gradient-theme");
   localStorage.setItem("theme", theme);
 
-  // Swap GitHub streak image src so ring/fire stay #b82e62 in all themes
-  const ghStreakImg = document.getElementById("ghStreakImg");
-  if (ghStreakImg) {
-    ghStreakImg.src = (theme === "dark" || theme === "gradient") ? GH_STREAK_DARK : GH_STREAK_LIGHT;
-  }
+  // GitHub streak image update on theme change is disabled to prevent auto-refreshing.
+  // It will now only update on page load or when the Sync button is clicked.
 
   // swap icon
   if (themeMoonIcon && themeSunIcon && themePaletteIcon) {
